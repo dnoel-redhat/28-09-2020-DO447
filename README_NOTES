@@ -1,0 +1,219 @@
+
+
+Nav    #Deep
+
+Reading UK
+DO447 Ansible 2.8 Ansible Tower 3.5
+EX447
+
+Name
+Company If possible
+Experience ansible(DO407/RH294), Linux Expi RHCSA EX200
+City
+Expectation
+Hobbies/Interesting Things
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Chapter 1:
+
+Shell/Command/raw modules are not Idempotent, Overwrite even if things exist "Desired state"
+
+Idempotent modules will check "Desired State", it already exists doesn't make any change
+
+
+
+
+Dynamic Inventory
+Python/any other script:
+
+
+Active Directory
+LDAP
+RH satelite
+Amazon
+GCE
+Azure
+
+
+Run a playbook on groups where serverb* is the member
+
+
+Chapter 2:
+
+Inventory-file		Runtime-inventory
+
+
+ansible-inventory purpose is not convert ini to yaml, instead what is final value for some_var at run tim
+
+		Scope of Variables:
+1 <  2  < 3
+
+A.	Host Scope
+
+	1.	inventory File group variable		use = symbol
+	2.	inventory/group_vars/all		use : symbol
+	3.	inventory/group_vars/groupname		use : symbol
+	4.	groups_vars/{{groupname}}		use : symbol
+	
+	
+	5.	inventory File_ server variable		use = symbol
+	6.	inventory/host_vars/hostname		use : symbol
+	7.	host_vars/{{servername}}		use : symbol
+
+B. 	Playbook Scope
+	8.	vars:
+	
+	9.	vars_prompt:
+			Look into vars_prompt_demo.yml in extras folder
+	10.	vars_files:
+			- file_path
+	11.	Task Scope:
+		vars:
+		  variable_name: "Value"  ## For that Specific Task
+	12.	set_fact:
+			
+C.	Global Scope (Command Line Values)
+	13. ansible-playbook abc.yml -e 'var_name=some_value' 
+	
+	
+	ansible_connection
+	unix/Linux	ssh(default)
+	windows		winrm
+	network devices	network_cli, netconf
+
+
+
+	
+1. Pre Check Tasks
+2. Pre Check Handlers
+3. Dependency Role Tasks (firewall)
+4. Main Role Tasks (webserver)
+5. extra tasks in playbook
+6. Dependency Role Handlers
+7. Main Role Handlers
+8. extra handlers invoked by tasks in playbook
+9. Post Check Tasks
+10. Post Check Handlers
+
+4 tasks
+forks 3
+Hosts: 12
+	Horizontal Direction
+	A	B	C		D	E	F	 	G 	H 	I	 	J	K	L
+	1	1	1		1	1	1		1	1	1		1	1	1
+	2	2	2		2	2	2		2	2	2		2	2	2
+	
+serial: 2
+	A	B		C	D		E	F 		G 	H 		I 	J
+	1	1		1	1		1	1		1	1		1	1
+	2	2		2	2		2	2		2	2		2	2
+	
+	
+	forks				serial
+	
+	
+	
+Forks Serial
+
+
+
+
+	forks					serial
+1.	ansible.cfg				playbook
+	--forks=4
+2.	Manage number of threads/load		control no of systems updating at same time
+	 on control node
+3.	task by task				host by host/play by play
+
+	
+	
+	
+	lookup password plugin create password put in plain text in localfile
+				sha512 store in remote system
+	
+	
+	
+	GUI		nginx
+	Messgaing	Rabbitmq
+	Database	Postgresql(3.1 onwards) earlier mongodb
+	
+	
+Tower:
+
+1. Playbook (Manual Copy/Download git) 
+2. /var/lib/awx/projects owner chown -R awx:awx /var/lib/awx/projects/{Some_Folder}
+3. Inventory
+4. Credentials
+5. Projects     1<-->1 mapping of folder
+6. Job Template
+7. RBAC
+
+
+ANSIBLE_STDOUT_CALLBACK=yaml 	ansible-playbook filters_demo.yml
+
+
+default('CONTAINED',true)
+
+another|default(omit)
+
+
+
+
+
+
+
+
+
+
+Chapter 6:
+
+Run a Job:
+1. Inventory
+2. Playbook Folder(Manual Copy/Git SCM)
+3. Change permission to awx:awx /var/lib/awx/projects/your_folder
+4. Project maps to your_playbook_folder (Project <-> one_folder) One to one Mapping
+5. Credentials ANsible Config
+6. Job Template
+7. RBAC User 
+
+
