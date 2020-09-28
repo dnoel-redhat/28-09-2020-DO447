@@ -1,0 +1,15 @@
+- name: Setup Git with new lab parameters
+  hosts: localhost
+  tasks:
+  - name:  git values
+    git_config:
+      name: "{{ item.name }}"
+      scope: global
+      value: "{{ item.value }}"
+    loop:
+    - name: user.name
+      value: 'Daniel George'
+    - name: user.email
+      value: daniel@lab.example.com
+    - name: push.default
+      value: simple

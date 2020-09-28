@@ -1,0 +1,10 @@
+- name: Don't use module sheel, command, raw if possible
+  hosts: localhost
+  tasks:
+  - name: Create file
+    shell: tail -2 /etc/passwd #touch /tmp/abc
+
+  - name: Create another file with module
+    file:
+      path: /tmp/abc1
+      state: file

@@ -1,0 +1,65 @@
+- name: Play
+  hosts: servera*
+  become: false
+  tasks:
+  - name: First Task
+    debug:
+      msg: "OUTSIDE BLOCK"
+
+  - name: Setup WEb Server tasks as block
+    block:
+    - name: Install httpd please
+      yum:
+        name: httpd
+        state: latest
+ 
+    - name: Create index.html
+      copy:
+        content: "Something here achec"
+        dest: /var/www/html/index.html
+ 
+    - name: Restart httpd service
+      service:
+        name: httpd
+        state: restarted
+        enabled: true
+    when: ansible_distribution == "RedHat"
+    become: true
+    rescue:
+    - name: Rollback/UNDo wrong thingsd
+      debug:
+        msg: "sadfdasdfdc"
+    - name: Mail about error to L3
+      mail:
+        options:
+    always:
+    - name: Inform BOSS
+      debug:
+        msg: "Inform Stakeholders"
+    - name: update docs/logs
+      debug:
+        msg: "update logs"
+
+  - name: Second Tasl Outside block
+    command:  tail -2 /etc/shadow
+    become: true
+
+
+
+
+  #- name: Setup vsftpd Server tasks as block
+  #  block:
+  #  - name: Install httpd please
+  #    yum:
+  #      name: vsftpd
+  #      state: latest
+  #    become: true
+ 
+  #  - name: Restart httpd service
+  #    service:
+  #      name: httpd
+  #      state: restarted
+  #      enabled: true
+  #    become: true
+  #  when: ansible_distribution != "RedHat"
+

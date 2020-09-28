@@ -1,0 +1,6 @@
+
+## YAML FORMAT
+
+var1: "Playbook Folder group_vars for specfic group Level 4"
+ansible_port: 22
+ansible_connection: ssh 

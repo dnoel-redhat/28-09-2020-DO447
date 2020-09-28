@@ -1,0 +1,24 @@
+- name: Create Dynamic Groups
+  hosts: all
+  tasks:
+  - name: Generate dynamic groups based on OS
+    group_by:
+      key: "{{ ansible_distribution }}_servers"
+
+
+- name: Print 
+  hosts: RedHat_servers 
+
+#- name: Print Hosts
+#  hosts: all
+#  tasks:
+#  - name: print hosts from dev servers
+#    debug:
+#      var: groups["dev"]
+#    
+#    #command: ansible dev --list-hosts
+#    
+#  - name: print hosts from prod servers
+#    debug:
+#      msg: "{{ ansible_hostname }}"
+#    when: inventory_hostname in groups["dev"]

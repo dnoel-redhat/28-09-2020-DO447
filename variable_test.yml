@@ -1,0 +1,30 @@
+- name: Variable Testing
+  hosts: dev
+  gather_facts: no
+
+  vars:
+    var1: "vars section Level 8"
+
+  vars_prompt:   ## recommded at development level
+  - name: var1
+    prompt: "Enter your Value Level 9"
+    private: no
+
+  vars_files: ## recommedned
+  - ./external_vars.yml
+
+  tasks:
+  
+  - name: Create Fact on Fly
+    set_fact:
+      var1: "Value on Fly Level 12"
+
+  - name: Variable Print 1
+    debug:
+      msg: "{{ var1 }}" ##{{ ansible_distribution }}"
+    vars:
+      var1: "Level 11 NOT happy with 10"
+
+  - name: Variable Print 2
+    debug:
+      msg: "{{ var1 }}"

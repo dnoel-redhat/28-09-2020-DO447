@@ -1,0 +1,27 @@
+control:
+  hosts:
+    workstation.lab.example.com: {}
+dev:
+  hosts:
+    serverb.lab.example.como: {}
+    serverc.lab.example.com: {}
+      ansible_become: true
+  vars:
+    var1: value1
+prod:
+  hosts:
+    serverd.lab.example.com: {}
+    servere.lab.example.com: 
+      var1: value3
+    serverf.lab.example.com: {}
+  vars:
+    var1: value2
+test:
+  hosts:
+    serverc.lab.example.com: {}
+    serverd.lab.example.com: {}
+  vars:
+    var1: value5
+ungrouped:
+  hosts:
+    servera.lab.example.com: {}

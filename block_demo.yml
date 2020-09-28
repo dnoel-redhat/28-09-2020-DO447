@@ -1,0 +1,54 @@
+- name: handlers Demo
+  hosts: servera.lab.example.com
+  become: false
+  remote_user: devops
+  gather_facts: yes
+  tasks:
+  - name: First Task
+    debug:
+      msg: "I am outside Block"
+
+  - name: Block for setting up web server
+    block:
+    - name: Install httpd please
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Install firewalld please
+      yum:
+        name: firewalld
+        state: latest
+
+    - name: Open Port please
+      firewalld:
+        service: "http"
+        state: enabled
+        immediate: true
+        permanent: true
+    - name: Create index.html
+      copy:
+        content: "Something  sedsad here achec"
+        dest: /var/www/html/index.html
+
+    - name: Restart httpd service
+      service:
+        name: httpd
+        state: restarted
+        enabled: true
+    become: true
+
+    rescue: 
+    - name: RECUEEEEEEEEEEE
+      debug:
+        msg: "RESCUE ME PLEASE"
+
+    always: 
+    - name: FINALLY
+      debug:
+        msg: "Always inform ME PLEASE"
+    when: ansible_distribution == "RedHat"
+  - name: I am OUTSIDE
+    debug:
+      msg: "I am from MARS"
+
