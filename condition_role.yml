@@ -1,0 +1,34 @@
+- name: Use the Role
+  hosts: servera*
+
+
+  tasks:              
+  - name: Role Run on a condition
+    #import_role:
+    include_role:
+      name: web_server
+    when: ansible_distribution == "Fedora"
+
+  - name: Extra Task from playbook
+    command: sleep 4  
+    notify: extra_handler
+
+  
+#  roles:
+#  - role: web_server
+#    become: true
+
+
+
+
+  handlers:
+  - name: extra_handler
+    debug:
+      msg: "Extra Handler for Extra Task"
+  - name: my_pre_handler
+    debug:
+      msg: "Check RAM and HDD"
+  - name: my_post_handler
+    debug:
+      msg: "Inform Stakeholders"
+

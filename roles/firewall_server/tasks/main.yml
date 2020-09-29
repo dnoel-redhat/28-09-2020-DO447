@@ -1,0 +1,14 @@
+- name: Install firewalld please
+  yum:
+    name: firewalld
+    state: latest
+  notify:
+  - Start firewalld service
+- name: Open Port please
+  firewalld:
+    service: "{{firewall_server_rule}}"
+    state: enabled
+    immediate: true
+    permanent: true
+  notify:
+  - Start firewalld service

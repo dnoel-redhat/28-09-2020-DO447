@@ -1,0 +1,38 @@
+- name: Use the Role
+  hosts: servera*
+
+
+  tasks:              
+  - name: Extra Task from playbook
+    command: sleep 4  
+    notify: extra_handler
+
+  
+  roles:
+  - role: web_server
+    become: true
+
+
+
+
+  handlers:
+  - name: extra_handler
+    debug:
+      msg: "Extra Handler for Extra Task"
+  - name: my_pre_handler
+    debug:
+      msg: "Check RAM and HDD"
+  - name: my_post_handler
+    debug:
+      msg: "Inform Stakeholders"
+
+  post_tasks:
+  - name: Clean UP Mess/email to boss
+    command: sleep 4
+    notify: my_post_handler
+
+
+  pre_tasks:
+  - name: Check Pre-Requisites
+    command: sleep 4
+    notify: my_pre_handler

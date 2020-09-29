@@ -1,0 +1,34 @@
+- name: Tag Demo
+  hosts: servera.lab.example.com
+  gather_facts: no
+  tasks:
+  - name: Task 1
+    command: sleep 1
+    tags:
+    - dev
+    - test
+  - name: Task 2
+    command: sleep 1
+    tags:
+    - prod
+  - name: Task 3
+    command: sleep 1
+    tags:
+    - always
+
+  - name: Task 4
+    command: sleep 1
+
+  - name: Never Run This Task 
+    command: sleep 1
+    tags:
+    - never
+
+  - name: Task 5
+    command: sleep 1
+    tags:
+    - dev
+  - name: Task 6
+    command: sleep 1
+    tags:
+    - prod

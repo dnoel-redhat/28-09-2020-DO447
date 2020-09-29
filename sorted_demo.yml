@@ -1,0 +1,7 @@
+- name: handlers Demo
+  hosts: all
+  serial: 1
+  order: reverse_sorted
+  tasks:
+  - name: mail to boss 3
+    command: sleep 2

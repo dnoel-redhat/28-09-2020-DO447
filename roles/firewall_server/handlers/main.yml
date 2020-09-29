@@ -1,0 +1,6 @@
+- name: Start firewalld service
+  service:
+    name: firewalld
+    state: restarted
+    enabled: true
+

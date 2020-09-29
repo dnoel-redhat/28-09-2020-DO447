@@ -1,0 +1,48 @@
+- name: Filters Demo
+  hosts: servera*
+  gather_facts: FALSE
+  vars:
+    contain: ''
+    my_dict:
+      Douglas: Human
+      Marvin: Robot
+      Arthur: Human
+    my_list:
+    - key: Douglas
+      value: Human
+    - key: Marvin
+      value: Robot
+    - key: Arthur
+      value: Human
+    one_more_list:
+    - v1
+    - v2
+    - v3
+  tasks:
+  - name: Print
+    debug:
+      msg: |
+              "This {{ 'string' | capitalize }} will 
+              {{ 'not' | upper | lower }}
+              {{ somevar | default('Hello World') | quote }}
+              {{ [ 4, 8, 10, 2, 6, 2 ] | reverse | unique | list }}
+              {{ [ 1, 4, 2, 2 ] | unique | sort }}
+               contain any line breaks.
+               {{ 'Separated' | password_hash('sha512') }}
+               lines are joined
+               by a space character."
+    when: contain is   defined
+  - name: Convert dict to list
+    debug:
+      msg: "{{ item.key | quote }}"
+    with_dict: "{{ my_list | items2dict  }}"
+    #loop: "{{ my_dict | dict2items }}"
+
+  #- name: Print selected
+  #  debug:
+  #    msg: "{{ my_list[2]['key']  }}"
+  #- name: Print List/Dict
+  #  debug:
+   #    msg: "{{ item.key }}"
+  #  with_dict: "{{ my_dict }}"
+    #with_list: "{{ my_list }}"

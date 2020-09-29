@@ -1,0 +1,36 @@
+{# System Information #}
+
+
+####### Control Node Info ################
+
+{% for i in groups["control"]  %}
+System FQDN	= {{hostvars[i].ansible_fqdn}}
+IP 		= {{hostvars[i].ansible_default_ipv4.address}}
+HDD Size	= {{hostvars[i].ansible_devices.vda.size}}	
+Date		= {{hostvars[i].ansible_date_time.date}}
+Time		= {{hostvars[i].ansible_date_time.time}}
+Total Memory	= {{hostvars[i].ansible_memory_mb.real.total}}
+Hostname	= {{hostvars[i].ansible_hostname}}
+OS		= {{hostvars[i].ansible_distribution}}
+{% endfor  %}
+
+####### Control Node Ends ################
+
+
+####### Managed Host Info ################
+
+{% for i in groups["all"]  %}
+{% if i not in groups["control"]  %}
+Loop Value	= {{i}}
+System FQDN	= {{hostvars[i].ansible_fqdn}}
+IP 		= {{hostvars[i].ansible_default_ipv4.address}}
+HDD Size	= {{hostvars[i].ansible_devices.vda.size}}	
+Date		= {{hostvars[i].ansible_date_time.date}}
+Time		= {{hostvars[i].ansible_date_time.time}}
+Total Memory	= {{hostvars[i].ansible_memory_mb.real.total}}
+Hostname	= {{hostvars[i].ansible_hostname}}
+OS		= {{hostvars[i].ansible_distribution}}
+
+{% endif  %}
+{% endfor  %}
+####### Managed Host Ends ################

@@ -1,0 +1,52 @@
+- name: handlers Demo
+  hosts: servera.lab.example.com
+  become: true
+  tasks:
+  - name: Install httpd please
+    yum:
+      name: httpd
+      state: latest
+    notify:
+    - Start httpd service
+    - mail to boss
+
+  - name: force all notified handlers to run at th
+    meta: flush_handlers
+
+  - name: Create index.html
+    copy:
+      content: "Something here achec"
+      dest: /var/www/html/index.html
+    notify: 
+    - Start httpd service
+    - mail to everyone
+
+  handlers:
+  - name: mail to everyone
+    debug:
+      msg: "Inform ervyone"
+    
+  - name: mail to boss
+    debug:
+      msg: "Inform boss"
+
+  - name: Start httpd service
+    service:
+      name: httpd
+      state: restarted
+      enabled: true
+
+  - name: mail to client 1
+    debug:
+      msg: "Inform boss"
+    listen: mail to everyone
+
+  - name: mail to boss 2   
+    debug:
+      msg: "Inform boss"
+    listen: mail to everyone
+
+  - name: mail to boss 3
+    debug:
+      msg: "Inform boss"
+    listen: mail to everyone

@@ -1,0 +1,51 @@
+- name: Advanced Loop Demo
+  hosts: servera*
+  gather_facts: FALSE
+  vars:
+    contain: ''
+    my_dict:
+      Douglas: Human
+      Marvin: Robot
+      Arthur: Human
+    my_list:
+    - key: Douglas
+      value: Human
+    - key: Marvin
+      value: Robot
+    - key: Arthur
+      value: Human
+  tasks:
+  - name: Print lookup list/dict plugin
+    debug:
+      msg: "{{ item.key }}"
+    loop: "{{ lookup('list', my_list ) }}"
+    #loop: "{{ lookup('dict', my_dict ) }}"
+
+  #- name: Print with_list
+  #  debug:
+  #    msg: "{{ item }}"
+  #  with_list: "{{ my_list }}"
+
+  #- name: Print with_dict
+  #  debug:
+  #    msg: "{{ item.key }}"
+  #  with_dict: "{{ my_dict }}"
+
+  #- name: Print loop
+  #  debug:
+  #    msg: "{{ item }}"
+  #  loop: "{{ my_dict | dict2items }}"
+    #loop: "{{ my_list }}"
+
+  #- name: Asset this
+  #  assert:
+  #    #that: "{{ my_dict | dict2items }} is eq(my_list) "
+  #    that: "{{ my_list | items2dict }} is eq(my_dict) "
+  #    success_msg: "All Good"
+  #    fail_msg: "What the Hell is going on here"
+
+
+  #- name: Use case if dict2items
+  #  debug:
+  #    msg: "{{ item.key }}"
+  #  loop: "{{ my_dict | dict2items }}"

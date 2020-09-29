@@ -1,0 +1,22 @@
+## Good Comments ##
+
+
+- name: Force all notified handlers to run at this point
+  meta: flush_handlers
+
+
+
+
+- name: Install httpd please
+  yum: 
+    name: "{{ web_server_package_name }}"
+    state: "latest"
+  notify:
+  - Start httpd service
+
+- name: Create index.html
+  copy:
+    content: "{{ web_server_get_content }}"
+    dest: /var/www/html/index.html
+  notify:
+  - Start httpd service

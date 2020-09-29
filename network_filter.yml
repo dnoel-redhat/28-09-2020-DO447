@@ -1,0 +1,18 @@
+- name: Lookup Plugin File Demo
+  hosts: localhost
+  gather_facts: no
+  vars:
+    my_ip:
+    - 172.25.25.56
+    - 10.20.2.255
+    - 100.10.2.244
+    - 10.10.5.555
+    - ::1
+
+  tasks:
+      
+  - name: Print with loop
+    debug:
+      #msg: "{{  my_ip | ipaddr('public') }}"
+
+      msg: "{{ lookup('dig', 'example.com', 'qtype=MX') }}"

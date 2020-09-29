@@ -1,0 +1,17 @@
+- name: Parallel Demo
+  hosts: all
+  gather_facts: no
+  serial: 2
+
+  tasks:
+  - name: Take Down from LB
+    command: sleep 2
+
+  - name: Undeploy App v1
+    command: sleep 2
+
+  - name: Deploy App v2
+    command: sleep 2
+
+  - name: Put back on LB
+    command: sleep 2
