@@ -1,0 +1,18 @@
+- name: Parallelism Demo
+  hosts: servera.lab.example.com
+  become: true
+  gather_facts: no
+  tasks:
+  - name: Collect Facts
+    setup:
+    delegate_facts: yes
+   
+  - name: Add Host on fly
+    add_host:
+      name: serverf.lab.example.com
+
+  - name: On system 
+    user:
+      name: "{{  ansible_facts.ansible_local.jerry.user_info.username }}"
+      comment: "Manager={{ ansible_facts.ansible_local.jerry.dept_info.manager }}"
+    delegate_to: serverf.lab.example.com

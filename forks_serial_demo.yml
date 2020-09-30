@@ -1,17 +1,42 @@
 - name: Parallel Demo
   hosts: all
   gather_facts: no
-  serial: 2
+  #serial: 2
+  serial: 
+  - 10%
+  - 30%
+  - 50%
+  - 100%
+
+  max_fail_percentage: 30%
+
+  vars:
+    failed_servers:
+    - serverb.lab.example.com
+    - serverd.lab.example.com
 
   tasks:
   - name: Take Down from LB
     command: sleep 2
+    run_once: yes
 
   - name: Undeploy App v1
     command: sleep 2
+    #failed_when: inventory_hostname in failed_servers
 
   - name: Deploy App v2
     command: sleep 2
 
   - name: Put back on LB
     command: sleep 2
+
+
+#15%10 1
+#
+#15%30   3
+#
+#15%50 7
+#100% 4
+
+
+

@@ -1,8 +1,9 @@
 - name: handlers Demo
-  hosts: servera.lab.example.com
+  hosts: all #servera.lab.example.com
   become: false
   remote_user: devops
   gather_facts: yes
+  serial: 50%
   tasks:
   - name: First Task
     debug:
@@ -37,6 +38,7 @@
         state: restarted
         enabled: true
     become: true
+    run_once: true
 
     rescue: 
     - name: RECUEEEEEEEEEEE

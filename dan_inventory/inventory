@@ -1,7 +1,7 @@
 #localhost ansible_connection=local
 #  INI FORMAT
 servera.lab.example.com
-serverf.lab.example.com
+#serverf.lab.example.com
 
 [dev]
 serverb.lab.example.com var1="Specific host Inventory File Level 5"
@@ -17,16 +17,16 @@ serverd.lab.example.com
 #[test:vars]
 #var1=value2
 #
-#[prod]
-#serverd.lab.example.com
-#servere.lab.example.com
-#serverf.lab.example.com
+[prod]
+serverd.lab.example.com
+servere.lab.example.com
+serverf.lab.example.com
 #
 [control]
 workstation.lab.example.com
 
 
-#[range]
-#172.25.250.[9:15]
+[range]
+172.25.250.[9:15]
 ##ansible_port=5986 ansible_connection=winrm 
 
