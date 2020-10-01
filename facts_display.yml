@@ -1,0 +1,13 @@
+- name: Diaply Facts Cache Demo
+  hosts: all
+  remote_user: devops
+  gather_facts: yes
+  vars_prompt:
+  - name: youme
+    prompt: "hey enter value"
+    private: no
+  tasks:
+  - name: First Task
+    debug:
+      msg: "I am outside Block {{youme}} {{ ansible_distribution }}"
+

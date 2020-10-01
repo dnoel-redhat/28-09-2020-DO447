@@ -217,3 +217,29 @@ Run a Job:
 7. RBAC User 
 
 
+
+
+Chapter 12:
+Inventory:
+GUI
+From File/Dir
+awx-manage inventory_import --inventory-name="Import from file" --source="./inventory"
+awx-manage inventory_import --inventory-name="Import from file" --source="./dan_inventory/"
+awx-manage inventory_import --inventory-name="Import from file" --source="./dan_inventory/" --overwrite(MERGES with existing inventory)
+
+
+Git Repository
+
+
+
+Dynamic Active Directory, LDAP, RH satellite,VMware,Cloud (Scripts)
+Smart Inventory Based on Facts
+
+
+
+Scripts are written in Python normally. bash
+https://github.com/ansible/ansible/tree/stable-2.9/contrib/inventory
+
+
+
+

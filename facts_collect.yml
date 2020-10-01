@@ -1,0 +1,4 @@
+- name: Collect Facts
+  hosts: all
+  remote_user: devops
+  gather_facts: yes
