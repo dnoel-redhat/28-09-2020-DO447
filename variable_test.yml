@@ -14,7 +14,6 @@
   - ./external_vars.yml
 
   tasks:
-  
   - name: Create Fact on Fly
     set_fact:
       var1: "Value on Fly Level 12"

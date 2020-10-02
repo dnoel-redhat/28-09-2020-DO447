@@ -241,5 +241,34 @@ Scripts are written in Python normally. bash
 https://github.com/ansible/ansible/tree/stable-2.9/contrib/inventory
 
 
+ssh -L 22001:servera:22 user@controlnode (and keep it running)
 
+In the same machine, open a new terminal:
+
+ssh -L 22002:serverb:22 user@controlnode -o HostKeyAlias=servera -p22001 (and keep it running)
+
+In the same machine, open again a new terminal:
+
+ssh -L 22003:serverc:22 user@controlnode -o HostKeyAlias=serverb -p22002 (and keep it running)
+
+Now you have a direct connection to serverc through controlnode/22003
+
+
+
+https://paste.ec/paste/jl04S5uc#6-lZSjaIOWUbPiZizTdnRZW8QQp60XQMltWkbhnBLpp
+
+https://medium.com/@paulskarseth/ansible-bastion-host-proxycommand-e6946c945d30
+
+https://docs.ansible.com/ansible/latest/reference_appendices/faq.html
+
+cat /etc/tower/conf.d/custom.py
+PROJECTS_ROOT = '/tmp/projects'
+
+
+
+mkdir /tmp/projects
+mkdir /tmp/projects/myplays
+touch /tmp/projects/myplays/abc.yml
+chown -R awx:awx /tmp/projects
+ansible-tower-service restart
 
